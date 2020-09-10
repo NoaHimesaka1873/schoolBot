@@ -39,8 +39,9 @@ async def _sayschedule(ctx, school: str):
 
 @bot.command(pass_context=True, name="도움말")
 async def _help(ctx):
-    await ctx.send("학교봇 도움말:\n학교봇 급식 (학교명) (중식/석식): 오늘의 급식을 출력합니다.\n학교봇 학사일정 (학교명) : 오늘의 학사일정을 출력합니다.\n학교봇 시간표 (학교 종류) (학교명) (학년) (반) : 시간표를 출력합니다. 대부분의 경우에는 데이터가 없기 떄문에 결과값이 나오지 않습니다.\n학교 종류: 초등학교 중학교 고등학교")
-    await ctx.send("예시:\n학교봇 급식 초당고 중식\n학교봇 시간표 고등학교 백현고 3 1\n학교봇 학사일정 동백고")
+    f = open("help.md", "r")
+    await ctx.send(f.read())
+    f.close()
 
 @bot.command(pass_context=True, name="시간표")
 async def _saytimetable(ctx, schtype: str, school: str, grade: int, classnm: int):
@@ -49,7 +50,7 @@ async def _saytimetable(ctx, schtype: str, school: str, grade: int, classnm: int
         sctype = "els"
     elif schtype == "중학교":
         sctype = "mis"
-    os.system("python timetable.py {} {} {} {}".format(school, grade, classnm, sctype))
+    os.system("python timetable.py {} {} {} {} 0".format(school, grade, classnm, sctype))
     f = open("{} {} timetable.txt".format(school, datetime.today().strftime("%Y%m%d")), "r")
     timetable = f.read()
     if timetable is "":
@@ -57,6 +58,19 @@ async def _saytimetable(ctx, schtype: str, school: str, grade: int, classnm: int
     else:
         await ctx.send(timetable)
     f.close()
+
+@bot.command(pass_context=True, name="특수시간표")
+async def _sayspecialtimetable(ctx, schtype: str, school: str, grade: int, classnm: int):
+    #os.system("python timetable.py {} {} {} {} 1".format(school, grade, classnm, schtype))
+    #f = open("{} {} timetable.txt".format(school, datetime.today().strftime("%Y%m%d")), "r")
+    #timetable = f.read()
+    #if timetable is "":
+    #    await ctx.send("ERROR!")
+    #else:
+    #    await ctx.send(timetable)
+    #f.close()
+    ## 현재 neispy의 특수학교 학교급구분 미지원으로 사용 불가.
+    await ctx.send("현재 이 기능은 API Wrapper와 관련된 문제로 인하여 사용이 불가능합니다. 후에 기능이 지원되면 활성화 예정입니다.")
 
 bot.run(token)
 

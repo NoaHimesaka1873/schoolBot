@@ -5,12 +5,15 @@ from datetime import datetime
 
 tk = open("neistoken.txt", "r")
 isDinner = False
+isBreakfast = False
 key = tk.read()
 tk.close()
 schoolname = sys.argv[1]
 foodtype = sys.argv[2]
 if foodtype == "석식":
     isDinner = True
+if foodtype == "조식":
+    isBreakfast = True
 
 def getfood():
     neis = neispy.Client(KEY=key)
@@ -20,6 +23,8 @@ def getfood():
     SSC = schoolinfo[0].SD_SCHUL_CODE
     if isDinner:
         schoolmeal = neis.mealServiceDietInfo(AOSC, SSC, MLSV_YMD=int(datetime.today().strftime("%Y%m%d")), MMEAL_SC_CODE=3)
+    elif isBreakfast:
+        schoolmeal = neis.mealServiceDietInfo(AOSC, SSC, MLSV_YMD=int(datetime.today().strftime("%Y%m%d")), MMEAL_SC_CODE=1)
     else:
         schoolmeal = neis.mealServiceDietInfo(AOSC, SSC, MLSV_YMD=int(datetime.today().strftime("%Y%m%d")))
     meal = schoolmeal[0].DDISH_NM.replace("<br/>", "\n")
