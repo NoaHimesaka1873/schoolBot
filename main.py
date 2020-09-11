@@ -61,16 +61,14 @@ async def _saytimetable(ctx, schtype: str, school: str, grade: int, classnm: int
 
 @bot.command(pass_context=True, name="특수시간표")
 async def _sayspecialtimetable(ctx, schtype: str, school: str, grade: int, classnm: int):
-    #os.system("python timetable.py {} {} {} {} 1".format(school, grade, classnm, schtype))
-    #f = open("{} {} timetable.txt".format(school, datetime.today().strftime("%Y%m%d")), "r")
-    #timetable = f.read()
-    #if timetable is "":
-    #    await ctx.send("ERROR!")
-    #else:
-    #    await ctx.send(timetable)
-    #f.close()
-    ## 현재 neispy의 특수학교 학교급구분 미지원으로 사용 불가.
-    await ctx.send("현재 이 기능은 API Wrapper와 관련된 문제로 인하여 사용이 불가능합니다. 후에 기능이 지원되면 활성화 예정입니다.")
+    os.system("python timetable.py {} {} {} {} 1".format(school, grade, classnm, schtype))
+    f = open("{} {} timetable.txt".format(school, datetime.today().strftime("%Y%m%d")), "r")
+    timetable = f.read()
+    if timetable is "":
+        await ctx.send("ERROR!")
+    else:
+        await ctx.send(timetable)
+    f.close()
 
 bot.run(token)
 
