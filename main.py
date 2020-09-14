@@ -15,7 +15,7 @@ async def on_ready():
     print('------')
     await bot.change_presence(activity=discord.Game(name="도움말을 보시려면 \"학교봇 도움말\"을 이용해주세요!"))
 
-@bot.command(pass_context=True, name="급식")
+@bot.command(name="급식")
 async def _sayfood(ctx, school: str, foodtype: str):
     os.system("python food.py {} {}".format(school, foodtype))
     f = open("{} {} food.txt".format(school, datetime.today().strftime("%Y%m%d")), "r")
@@ -26,7 +26,7 @@ async def _sayfood(ctx, school: str, foodtype: str):
         await ctx.send(foodie)
     f.close()
 
-@bot.command(pass_context=True, name="학사일정")
+@bot.command(name="학사일정")
 async def _sayschedule(ctx, school: str):
     os.system("python schedule.py {}".format(school))
     f = open("{} {} schedule.txt".format(school, datetime.today().strftime("%Y%m%d")))
@@ -37,13 +37,13 @@ async def _sayschedule(ctx, school: str):
         await ctx.send(schedule)
     f.close()
 
-@bot.command(pass_context=True, name="도움말")
+@bot.command(name="도움말")
 async def _help(ctx):
     f = open("help.md", "r")
     await ctx.send(f.read())
     f.close()
 
-@bot.command(pass_context=True, name="시간표")
+@bot.command(name="시간표")
 async def _saytimetable(ctx, schtype: str, school: str, grade: int, classnm: int):
     sctype = "his"
     if schtype == "초등학교":
@@ -59,7 +59,7 @@ async def _saytimetable(ctx, schtype: str, school: str, grade: int, classnm: int
         await ctx.send(timetable)
     f.close()
 
-@bot.command(pass_context=True, name="특수시간표")
+@bot.command(name="특수시간표")
 async def _sayspecialtimetable(ctx, schtype: str, school: str, grade: int, classnm: int):
     os.system("python timetable.py {} {} {} {} 1".format(school, grade, classnm, schtype))
     f = open("{} {} timetable.txt".format(school, datetime.today().strftime("%Y%m%d")), "r")
