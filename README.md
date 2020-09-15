@@ -1,9 +1,10 @@
 # 학교봇
 NEIS Open API를 이용해 시간표(일반적으로 지원되지 않음)와 급식을 볼 수 있는 봇
 # 설치 방법
-1. `pip install -r requirements.txt`를 입력하여 의존요소를 설치합니다.
-2. `discordtoken.txt`에 디스코드 봇 토큰을 붙여 넣고 저장합니다.
-3. `neistoken.txt`에 NEIS Open API 토큰을 붙여 넣고 저장합니다,
+1. `git clone https://github.com/NoaHimesaka1873/schoolBot`를 입력하여 학교봇의 최신 버전을 다운로드 합니다.
+2. `pip install -r requirements.txt`를 입력하여 의존요소를 설치합니다.
+3. `discordtoken.txt`에 디스코드 봇 토큰을 붙여 넣고 저장합니다.
+4. `neistoken.txt`에 NEIS Open API 토큰을 붙여 넣고 저장합니다.
 # 실행 방법
 1. 파이썬으로 `main.py`를 실행합니다.
 # 면책 조항
