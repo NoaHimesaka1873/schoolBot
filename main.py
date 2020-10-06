@@ -20,10 +20,7 @@ async def _sayfood(ctx, school: str, foodtype: str):
     os.system("python food.py {} {}".format(school, foodtype))
     f = open("{} {} food.txt".format(school, datetime.today().strftime("%Y%m%d")), "r")
     foodie = f.read()
-    if foodie is "":
-        await ctx.send("ERROR!")
-    else:
-        await ctx.send(foodie)
+    await check(foodie, ctx)
     f.close()
 
 @bot.command(name="학사일정")
@@ -31,10 +28,7 @@ async def _sayschedule(ctx, school: str):
     os.system("python schedule.py {}".format(school))
     f = open("{} {} schedule.txt".format(school, datetime.today().strftime("%Y%m%d")))
     schedule = f.read()
-    if schedule == "":
-        await ctx.send("ERROR!")
-    else:
-        await ctx.send(schedule)
+    await check(schedule, ctx)
     f.close()
 
 @bot.command(name="도움말")
@@ -53,10 +47,7 @@ async def _saytimetable(ctx, schtype: str, school: str, grade: int, classnm: int
     os.system("python timetable.py {} {} {} {} 0".format(school, grade, classnm, sctype))
     f = open("{} {} timetable.txt".format(school, datetime.today().strftime("%Y%m%d")), "r")
     timetable = f.read()
-    if timetable is "":
-        await ctx.send("ERROR!")
-    else:
-        await ctx.send(timetable)
+    await check(timetable, ctx)
     f.close()
 
 @bot.command(name="특수시간표")
@@ -64,11 +55,14 @@ async def _sayspecialtimetable(ctx, schtype: str, school: str, grade: int, class
     os.system("python timetable.py {} {} {} {} 1".format(school, grade, classnm, schtype))
     f = open("{} {} timetable.txt".format(school, datetime.today().strftime("%Y%m%d")), "r")
     timetable = f.read()
-    if timetable is "":
+    await check(timetable, ctx)
+    f.close()
+
+async def check(check: str, ctx):
+    if not check:
         await ctx.send("ERROR!")
     else:
-        await ctx.send(timetable)
-    f.close()
+        await ctx.send(check)
 
 bot.run(token)
 
