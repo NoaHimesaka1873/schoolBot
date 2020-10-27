@@ -13,16 +13,16 @@ async def on_ready():
     await bot.change_presence(activity=discord.Game(name="도움말을 보시려면 \"학교봇 도움말\"을 이용해주세요!"))
 
 @bot.command(name="급식")
-async def _sayfood(ctx, school: str, foodtype: str):
-    os.system("python food.py {} {}".format(school, foodtype))
-    with open("{} {} food.txt".format(school, datetime.today().strftime("%Y%m%d")), "r") as f:
+async def _sayFood(ctx, school: str, foodtype: str):
+    os.system(f"python food.py {school} {foodtype}")
+    with open(f"{school} {datetime.today().strftime("%Y%m%d")} food.txt", "r") as f:
         foodie = f.read()
         await check(foodie, ctx)
 
 @bot.command(name="학사일정")
-async def _sayschedule(ctx, school: str):
+async def _saySchedule(ctx, school: str):
     os.system("python schedule.py {}".format(school))
-    with open("{} {} schedule.txt".format(school, datetime.today().strftime("%Y%m%d"))) as f:
+    with open(f"{school} {datetime.today().strftime("%Y%m%d")} schedule.txt") as f:
         schedule = f.read()
         await check(schedule, ctx)
 
@@ -32,21 +32,21 @@ async def _help(ctx):
         await ctx.send(f.read())
 
 @bot.command(name="시간표")
-async def _saytimetable(ctx, schtype: str, school: str, grade: int, classnm: int):
+async def _sayTimetable(ctx, schtype: str, school: str, grade: int, classnm: int):
     sctype = "his"
     if schtype == "초등학교":
         sctype = "els"
     elif schtype == "중학교":
         sctype = "mis"
-    os.system("python timetable.py {} {} {} {} 0".format(school, grade, classnm, sctype))
-    with open("{} {} timetable.txt".format(school, datetime.today().strftime("%Y%m%d")), "r") as f:
+    os.system(f"python timetable.py {school} {grade} {classnm} {sctype} 0")
+    with open(f"{school} {datetime.today().strftime("%Y%m%d")} timetable.txt", "r") as f:
         timetable = f.read()
         await check(timetable, ctx)
 
 @bot.command(name="특수시간표")
-async def _sayspecialtimetable(ctx, schtype: str, school: str, grade: int, classnm: int):
-    os.system("python timetable.py {} {} {} {} 1".format(school, grade, classnm, schtype))
-    with open("{} {} timetable.txt".format(school, datetime.today().strftime("%Y%m%d")), "r") as f:
+async def _saySpecialTimetable(ctx, schtype: str, school: str, grade: int, classnm: int):
+    os.system(f"python timetable.py {school} {grade} {classnm} {schtype} 1")
+    with open(f"{school} {datetime.today().strftime("%Y%m%d")} timetable.txt", "r") as f:
         timetable = f.read()
         await check(timetable, ctx)
 
