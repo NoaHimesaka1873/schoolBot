@@ -8,9 +8,11 @@ token = ""
 with open("discordtoken.txt", "r") as tk:
     token = tk.read()
 
+
 @bot.event
 async def on_ready():
     await bot.change_presence(activity=discord.Game(name="도움말을 보시려면 \"학교봇 도움말\"을 이용해주세요!"))
+
 
 @bot.command(name="급식")
 async def _sayFood(ctx, school: str, foodtype: str):
@@ -19,6 +21,7 @@ async def _sayFood(ctx, school: str, foodtype: str):
         foodie = f.read()
         await check(foodie, ctx)
 
+
 @bot.command(name="학사일정")
 async def _saySchedule(ctx, school: str):
     os.system("python schedule.py {}".format(school))
@@ -26,10 +29,12 @@ async def _saySchedule(ctx, school: str):
         schedule = f.read()
         await check(schedule, ctx)
 
+
 @bot.command(name="도움말")
 async def _help(ctx):
     with open("help.md", "r") as f:
         await ctx.send(f.read())
+
 
 @bot.command(name="시간표")
 async def _sayTimetable(ctx, schtype: str, school: str, grade: int, classnm: int):
@@ -43,6 +48,7 @@ async def _sayTimetable(ctx, schtype: str, school: str, grade: int, classnm: int
         timetable = f.read()
         await check(timetable, ctx)
 
+
 @bot.command(name="특수시간표")
 async def _saySpecialTimetable(ctx, schtype: str, school: str, grade: int, classnm: int):
     os.system(f"python timetable.py {school} {grade} {classnm} {schtype} 1")
@@ -50,12 +56,12 @@ async def _saySpecialTimetable(ctx, schtype: str, school: str, grade: int, class
         timetable = f.read()
         await check(timetable, ctx)
 
-async def check(check: str, ctx):
-    if not check:
+
+async def check(chk: str, ctx):
+    if not chk:
         await ctx.send("ERROR!")
     else:
         await ctx.send(check)
 
+
 bot.run(token)
-
-
