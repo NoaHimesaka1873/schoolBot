@@ -7,6 +7,8 @@ tk = open("neistoken.txt", "r")
 key = tk.read()
 tk.close()
 schoolname = sys.argv[1]
+
+
 def getschedule():
     neis = neispy.Client(KEY=key)
 
@@ -20,6 +22,6 @@ def getschedule():
 
 
 _schedule = getschedule()
-f = open("{} {} schedule.txt".format(schoolname, datetime.today().strftime("%Y%m%d")), "w+")
+f = open(f"{schoolname} {datetime.today().strftime('%Y%m%d')} schedule.txt", "w+")
 f.write(_schedule)
 f.close()

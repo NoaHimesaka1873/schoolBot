@@ -33,7 +33,7 @@ def getfood():
 
 
 _meal = getfood()
-f = open("{} {} food.txt".format(schoolname, datetime.today().strftime("%Y%m%d")), "w+")
+f = open(f"{schoolname} {datetime.today().strftime('%Y%m%d')} food.txt", "w+")
 f.write(_meal)
 
 f.close()

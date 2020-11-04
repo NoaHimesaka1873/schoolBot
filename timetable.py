@@ -12,6 +12,7 @@ _class = int(sys.argv[3])
 schtype = sys.argv[4]
 isSpecial = int(sys.argv[5])
 
+
 def gettimetable():
     neis = neispy.Client(KEY=key)
     sctimetable = None
@@ -27,6 +28,6 @@ def gettimetable():
 
 
 _timetable = gettimetable()
-f = open("{} {} timetable.txt".format(schoolname, datetime.today().strftime("%Y%m%d")), "w+")
+f = open(f"{schoolname} {datetime.today().strftime('%Y%m%d')} timetable.txt", "w+")
 f.write(_timetable)
 f.close()
