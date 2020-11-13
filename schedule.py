@@ -22,6 +22,5 @@ def getschedule():
 
 
 _schedule = getschedule()
-f = open(f"{schoolname} {datetime.today().strftime('%Y%m%d')} schedule.txt", "w+")
-f.write(_schedule)
-f.close()
+with open(f"{schoolname} {datetime.today().strftime('%Y%m%d')} schedule.txt", "w+") as f:
+    f.write(_schedule)

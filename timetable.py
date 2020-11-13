@@ -28,6 +28,5 @@ def gettimetable():
 
 
 _timetable = gettimetable()
-f = open(f"{schoolname} {datetime.today().strftime('%Y%m%d')} timetable.txt", "w+")
-f.write(_timetable)
-f.close()
+with open(f"{schoolname} {datetime.today().strftime('%Y%m%d')} timetable.txt", "w+") as f:
+    f.write(_timetable)
