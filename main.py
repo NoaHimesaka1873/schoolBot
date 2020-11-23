@@ -61,7 +61,7 @@ async def check(chk: str, ctx):
     if not chk:
         await ctx.send("ERROR!")
     else:
-        await ctx.send(check)
+        await ctx.send(chk)
 
 
 bot.run(token)
