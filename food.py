@@ -2,11 +2,11 @@ import neispy
 import sys
 from datetime import datetime
 
-tk = open("neistoken.txt", "r")
+with open("neistoken.txt", "r") as tk:
+    key = tk.read()
+
 isDinner = False
 isBreakfast = False
-key = tk.read()
-tk.close()
 schoolname = sys.argv[1]
 foodtype = sys.argv[2]
 if foodtype == "석식":

@@ -3,9 +3,9 @@ import sys
 from datetime import datetime
 
 
-tk = open("neistoken.txt", "r")
-key = tk.read()
-tk.close()
+with open("neistoken.txt", "r") as tk:
+    key = tk.read()
+
 schoolname = sys.argv[1]
 
 
