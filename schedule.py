@@ -1,10 +1,11 @@
 import neispy
 import sys
+import re
 from datetime import datetime
 
 
 with open("neistoken.txt", "r") as tk:
-    key = tk.read()
+    key = re.sub('[\s+]', '', tk.read()).rstrip()
 
 schoolname = sys.argv[1]
 

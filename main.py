@@ -1,12 +1,13 @@
 import discord
-from discord.ext import commands
 import os
+import re
 from datetime import datetime
+from discord.ext import commands
 
 bot = commands.Bot("학교봇 ")
 token = ""
 with open("discordtoken.txt", "r") as tk:
-    token = tk.read()
+    token = re.sub('[\s+]', '', tk.read()).rstrip()
 
 
 @bot.event
@@ -15,9 +16,13 @@ async def on_ready():
 
 
 @bot.command(name="급식")
-async def _sayFood(ctx, school: str, foodtype: str):
-    os.system(f"python food.py {school} {foodtype}")
-    with open(f"{school} {datetime.today().strftime('%Y%m%d')} food.txt", "r") as f:
+async def _sayFood(ctx, _date: str, school: str, foodtype: str):
+    if _date == "오늘":
+        _date = datetime.today().strftime('%Y%m%d')
+    elif _date == "내일":
+        _date = int((datetime.today() + datetime.timedelta(days=1)).strftime('%Y%m%d'))
+    os.system(f"python food.py {_date} {school} {foodtype}")
+    with open(f"{school} {_date} food.txt", "r") as f:
         foodie = f.read()
         await check(foodie, ctx)
 
