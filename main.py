@@ -1,7 +1,7 @@
 import discord
 import os
 import re
-from datetime import datetime
+from datetime import datetime, date, timedelta
 from discord.ext import commands
 
 bot = commands.Bot("학교봇 ")
@@ -20,7 +20,7 @@ async def _sayFood(ctx, _date: str, school: str, foodtype: str):
     if _date == "오늘":
         _date = datetime.today().strftime('%Y%m%d')
     elif _date == "내일":
-        _date = int((datetime.today() + datetime.timedelta(days=1)).strftime('%Y%m%d'))
+        _date = (date.today() + timedelta(days=1)).strftime('%Y%m%d')
     os.system(f"python food.py {_date} {school} {foodtype}")
     with open(f"{school} {_date} food.txt", "r") as f:
         foodie = f.read()
