@@ -7,9 +7,9 @@ with open("neistoken.txt", "r") as tk:
 
 isDinner = False
 isBreakfast = False
-schoolname = sys.argv[1]
-foodtype = sys.argv[2]
-_date = sys.argv[3]
+schoolname = sys.argv[2]
+foodtype = sys.argv[3]
+_date = sys.argv[1]
 if foodtype == "석식":
     isDinner = True
 if foodtype == "조식":
