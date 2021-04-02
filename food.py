@@ -2,21 +2,22 @@ import neispy
 import sys
 import re
 
-with open("neistoken.txt", "r") as tk:
-    key = re.sub('[\s+]', '', tk.read()).rstrip()
+#with open("neistoken.txt", "r") as tk:
+#    key = re.sub('[\s+]', '', tk.read()).rstrip()
 
-isDinner = False
-isBreakfast = False
-schoolname = sys.argv[2]
-foodtype = sys.argv[3]
-_date = sys.argv[1]
-if foodtype == "석식":
-    isDinner = True
-if foodtype == "조식":
-    isBreakfast = True
+#isDinner = False
+#isBreakfast = False
+#schoolname = sys.argv[2]
+#_foodtype = sys.argv[3]
+#_date = sys.argv[1]
 
 
-def getfood():
+
+def getfood(foodtype: str, key: str, schoolname: str, _date: str, conn):
+    if foodtype == "석식":
+        isDinner = True
+    if foodtype == "조식":
+        isBreakfast = True
     neis = neispy.Client(KEY=key)
 
     schoolinfo = neis.schoolInfo(SCHUL_NM=schoolname)
@@ -32,9 +33,11 @@ def getfood():
         schoolmeal = neis.mealServiceDietInfo(AOSC, SSC, MLSV_YMD=int(_date))
     meal = schoolmeal[0].DDISH_NM.replace("<br/>", "\n")
     print(schoolmeal[0].MMEAL_SC_CODE)
-    return meal
+    conn.send(meal)
+    conn.close()
 
 
-_meal = getfood()
-with open(f"{schoolname} {_date} food.txt", "w+") as f:
-    f.write(_meal)
+if __name__ == '__main__':
+    _meal = getfood(_foodtype)
+    with open(f"{schoolname} {_date} food.txt", "w+") as f:
+        f.write(_meal)

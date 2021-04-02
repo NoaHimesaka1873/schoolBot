@@ -1,14 +1,18 @@
 import discord
 import os
 import re
+import food
 from datetime import datetime, date, timedelta
 from discord.ext import commands
+from multiprocessing import Process
 
 bot = commands.Bot("학교봇 ")
 token = ""
 with open("discordtoken.txt", "r") as tk:
     token = re.sub('[\s+]', '', tk.read()).rstrip()
 
+with open("neistoken.txt", "r") as tk:
+    key = re.sub('[\s+]', '', tk.read()).rstrip()
 
 @bot.event
 async def on_ready():
@@ -21,10 +25,17 @@ async def _sayFood(ctx, _date: str, school: str, foodtype: str):
         _date = datetime.today().strftime('%Y%m%d')
     elif _date == "내일":
         _date = (date.today() + timedelta(days=1)).strftime('%Y%m%d')
-    os.system(f"python food.py {_date} {school} {foodtype}")
-    with open(f"{school} {_date} food.txt", "r") as f:
-        foodie = f.read()
-        await check(foodie, ctx)
+    # os.system(f"python food.py {_date} {school} {foodtype}")
+
+    #with open(f"{school} {_date} food.txt", "r") as f:
+    #    foodie = f.read()
+    #    await check(foodie, ctx)
+    pipecon_p, pipecon_c = Pipe()
+    p = Process(target=food.getfood, args=(foodtype, key, school, _date, pipecon_c,))
+    p.start()
+    foodie = pipecon_p.recv()
+    p.join()
+    await check(foodie, ctx)
 
 
 @bot.command(name="학사일정")
