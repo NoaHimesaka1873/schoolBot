@@ -4,7 +4,7 @@ import re
 import food
 from datetime import datetime, date, timedelta
 from discord.ext import commands
-from multiprocessing import Process
+from multiprocessing import Process, Pipe
 
 bot = commands.Bot("학교봇 ")
 token = ""
