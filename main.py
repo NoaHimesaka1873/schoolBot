@@ -40,16 +40,16 @@ async def _saySchedule(ctx, school: str):
 async def _help(ctx):
     with open("help.json") as json_file:
         data = json.load(json_file)
-        embed1 = discord.embed(
+        embed1 = discord.Embed(
             title = "학교봇 도움말: 명령어",
             color=discord.Color.blue()
         )
-        embed2 = discord.embed(
+        embed2 = discord.Embed(
             title="학교봇 도움말: 예시와 참고 사항",
             color=discord.Color.blue()
         )
         for i in data['commands']:
-            embed1.add_field(name=i['commnand'], value=i['description'])
+            embed1.add_field(name=i['command'], value=i['description'])
         embed2.add_field(name="예시", value=data['examples'])
         embed2.add_field(name="참고 사항", value = data['instructions'])
         await ctx.send(embed=embed1)
