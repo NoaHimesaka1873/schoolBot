@@ -1,6 +1,7 @@
 import discord
 import os
 import re
+import json
 from datetime import datetime, date, timedelta
 from discord.ext import commands
 
@@ -37,8 +38,22 @@ async def _saySchedule(ctx, school: str):
 
 @bot.command(name="도움말")
 async def _help(ctx):
-    with open("help.md", "r") as f:
-        await ctx.send(f.read())
+    with open("help.json") as json_file:
+        data = json.load(json_file)
+        embed1 = discord.embed(
+            title = "학교봇 도움말: 명령어",
+            color=discord.Color.blue()
+        )
+        embed2 = discord.embed(
+            title="학교봇 도움말: 예시와 참고 사항",
+            color=discord.Color.blue()
+        )
+        for i in data['commands']:
+            embed1.add_field(name=i['commnand'], value=i['description'])
+        embed2.add_field(name="예시", value=data['examples'])
+        embed2.add_field(name="참고 사항", value = data['instructions'])
+        await ctx.send(embed=embed1)
+        await ctx.send(embed=embed2)
 
 
 @bot.command(name="시간표")
@@ -64,7 +79,7 @@ async def _saySpecialTimetable(ctx, schtype: str, school: str, grade: int, class
 
 async def check(chk: str, ctx):
     if not chk:
-        await ctx.send("ERROR!")
+        await ctx.send("에러! 올바르지 않은 응답이 반환되었습니다.")
     else:
         await ctx.send(chk)
 

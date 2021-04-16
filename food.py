@@ -31,7 +31,6 @@ def getfood():
     else:
         schoolmeal = neis.mealServiceDietInfo(AOSC, SSC, MLSV_YMD=int(_date))
     meal = schoolmeal[0].DDISH_NM.replace("<br/>", "\n")
-    print(schoolmeal[0].MMEAL_SC_CODE)
     return meal
 
 
