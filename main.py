@@ -23,9 +23,14 @@ async def _sayFood(ctx, _date: str, school: str, foodtype: str):
     elif _date == "내일":
         _date = (date.today() + timedelta(days=1)).strftime('%Y%m%d')
     os.system(f"python food.py {_date} {school} {foodtype}")
-    with open(f"{school} {_date} food.txt", "r") as f:
-        foodie = f.read()
-        await check(foodie, ctx)
+    with open(f"{school} {_date} food.json", "r") as f:
+        foodie = '\n'.join(json.load(f))
+        embed = discord.Embed(
+            title=f"{datetime.strptime(_date, '%Y%m%d').strftime('%Y년 %m월 %d일')}의 급식",
+            color=discord.Color.blue()
+        )
+        embed.add_field(name=f"{school} ({foodtype})", value=foodie)
+        await ctx.send(embed=embed)
 
 
 @bot.command(name="학사일정")
@@ -41,7 +46,7 @@ async def _help(ctx):
     with open("help.json") as json_file:
         data = json.load(json_file)
         embed1 = discord.Embed(
-            title = "학교봇 도움말: 명령어",
+            title="학교봇 도움말: 명령어",
             color=discord.Color.blue()
         )
         embed2 = discord.Embed(
@@ -49,9 +54,9 @@ async def _help(ctx):
             color=discord.Color.blue()
         )
         for i in data['commands']:
-            embed1.add_field(name=i['command'], value=i['description'])
+            embed1.add_field(name=i['command'], value=i['description'], inline=False)
         embed2.add_field(name="예시", value=data['examples'])
-        embed2.add_field(name="참고 사항", value = data['instructions'])
+        embed2.add_field(name="참고 사항", value=data['instructions'])
         await ctx.send(embed=embed1)
         await ctx.send(embed=embed2)
 

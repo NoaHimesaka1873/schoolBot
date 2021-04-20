@@ -1,6 +1,7 @@
 import neispy
 import sys
 import re
+import json
 
 with open("neistoken.txt", "r") as tk:
     key = re.sub('[\s+]', '', tk.read()).rstrip()
@@ -30,10 +31,10 @@ def getfood():
                                               MMEAL_SC_CODE=1)
     else:
         schoolmeal = neis.mealServiceDietInfo(AOSC, SSC, MLSV_YMD=int(_date))
-    meal = schoolmeal[0].DDISH_NM.replace("<br/>", "\n")
+    meal = schoolmeal[0].DDISH_NM.split("<br/>")
     return meal
 
 
 _meal = getfood()
-with open(f"{schoolname} {_date} food.txt", "w+") as f:
-    f.write(_meal)
+with open(f"{schoolname} {_date} food.json", "w+") as f:
+    json.dump(_meal, f)
