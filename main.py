@@ -77,7 +77,8 @@ async def _sayTimetable(ctx, schtype: str, school: str, grade: int, classnm: int
         )
         i=1
         for tt in timetable:
-            embed.add_field(name=f"{i++}교시", value=tt)
+            embed.add_field(name=f"{i}교시", value=tt)
+            i+=1
         await ctx.send(embed=embed)
 
 
