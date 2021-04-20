@@ -26,10 +26,10 @@ async def _sayFood(ctx, _date: str, school: str, foodtype: str):
     with open(f"{school} {_date} food.json", "r") as f:
         foodie = '\n'.join(json.load(f))
         embed = discord.Embed(
-            title=f"{datetime.strptime(_date, '%Y%m%d').strftime('%Y년 %m월 %d일')}의 급식",
+            title=f"{school}의 급식",
             color=discord.Color.blue()
         )
-        embed.add_field(name=f"{school} ({foodtype})", value=foodie)
+        embed.add_field(name=f"{datetime.strptime(_date, '%Y%m%d').strftime('%Y년 %m월 %d일')} ({foodtype})", value=foodie)
         await ctx.send(embed=embed)
 
 
