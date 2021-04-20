@@ -1,6 +1,7 @@
 import neispy
 import sys
 import re
+import json
 from datetime import datetime
 
 
@@ -24,10 +25,10 @@ def gettimetable():
         sctimetable = neis.timeTable(schclass="sps", ATPT_OFCDC_SC_CODE=AOSC, SD_SCHUL_CODE=SSC, ALL_TI_YMD=int(datetime.today().strftime("%Y%m%d")), GRADE=grade, CLASS_NM=_class, SCHUL_CRSE_SC_NM=schtype)
     else:
         sctimetable = neis.timeTable(schclass=schtype, ATPT_OFCDC_SC_CODE=AOSC, SD_SCHUL_CODE=SSC, ALL_TI_YMD=int(datetime.today().strftime("%Y%m%d")), GRADE=grade, CLASS_NM=_class)
-    timetable = str([i.ITRT_CNTNT for i in sctimetable])
+    timetable = [i.ITRT_CNTNT for i in sctimetable]
     return timetable
 
 
 _timetable = gettimetable()
-with open(f"{schoolname} {datetime.today().strftime('%Y%m%d')} timetable.txt", "w+") as f:
-    f.write(_timetable)
+with open(f"{schoolname} {datetime.today().strftime('%Y%m%d')} timetable.json", "w+") as f:
+    json.dump(_timetable, f)

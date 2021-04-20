@@ -55,8 +55,8 @@ async def _help(ctx):
         )
         for i in data['commands']:
             embed1.add_field(name=i['command'], value=i['description'], inline=False)
-        embed2.add_field(name="예시", value=data['examples'])
-        embed2.add_field(name="참고 사항", value=data['instructions'])
+        embed2.add_field(name="예시", value=data['examples'], inline=False)
+        embed2.add_field(name="참고 사항", value=data['instructions'], inline=False)
         await ctx.send(embed=embed1)
         await ctx.send(embed=embed2)
 
@@ -69,17 +69,31 @@ async def _sayTimetable(ctx, schtype: str, school: str, grade: int, classnm: int
     elif schtype == "중학교":
         sctype = "mis"
     os.system(f"python timetable.py {school} {grade} {classnm} {sctype} 0")
-    with open(f"{school} {datetime.today().strftime('%Y%m%d')} timetable.txt", "r") as f:
-        timetable = f.read()
-        await check(timetable, ctx)
+    with open(f"{school} {datetime.today().strftime('%Y%m%d')} timetable.json", "r") as f:
+        timetable = json.load(f)
+        embed = discord.Embed(
+            title=f"{school}의 시간표",
+            color=discord.Color.blue()
+        )
+        i=1
+        for tt in timetable:
+            embed.add_field(name=f"{i++}교시", value=tt)
+        await ctx.send(embed=embed)
 
 
 @bot.command(name="특수시간표")
 async def _saySpecialTimetable(ctx, schtype: str, school: str, grade: int, classnm: int):
     os.system(f"python timetable.py {school} {grade} {classnm} {schtype} 1")
-    with open(f"{school} {datetime.today().strftime('%Y%m%d')} timetable.txt", "r") as f:
-        timetable = f.read()
-        await check(timetable, ctx)
+    with open(f"{school} {datetime.today().strftime('%Y%m%d')} timetable.json", "r") as f:
+        timetable = json.load(f)
+        embed = discord.Embed(
+            title=f"{school}의 시간표",
+            color=discord.Color.blue()
+        )
+        i=1
+        for tt in timetable:
+            embed.add_field(name=f"{i++}교시", value=tt)
+        await ctx.send(embed=embed)
 
 
 async def check(chk: str, ctx):
