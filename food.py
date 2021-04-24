@@ -1,7 +1,7 @@
-import neispy
-import sys
-import re
 import json
+import neispy
+import re
+import sys
 
 with open("neistoken.txt", "r") as tk:
     key = re.sub('[\s+]', '', tk.read()).rstrip()

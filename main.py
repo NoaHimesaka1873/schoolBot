@@ -1,12 +1,11 @@
 import discord
+import json
 import os
 import re
-import json
 from datetime import datetime, date, timedelta
 from discord.ext import commands
 
 bot = commands.Bot("학교봇 ")
-token = ""
 with open("discordtoken.txt", "r") as tk:
     token = re.sub('[\s+]', '', tk.read()).rstrip()
 
@@ -75,10 +74,10 @@ async def _sayTimetable(ctx, schtype: str, school: str, grade: int, classnm: int
             title=f"{school}의 시간표",
             color=discord.Color.blue()
         )
-        i=1
+        i = 1
         for tt in timetable:
             embed.add_field(name=f"{i}교시", value=tt, inline=False)
-            i+=1
+            i += 1
         await ctx.send(embed=embed)
 
 
@@ -91,10 +90,10 @@ async def _saySpecialTimetable(ctx, schtype: str, school: str, grade: int, class
             title=f"{school}의 시간표",
             color=discord.Color.blue()
         )
-        i=1
+        i = 1
         for tt in timetable:
             embed.add_field(name=f"{i}교시", value=tt, inline=False)
-            i+=1
+            i += 1
         await ctx.send(embed=embed)
 
 
