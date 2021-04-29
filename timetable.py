@@ -16,7 +16,6 @@ isSpecial = int(sys.argv[5])
 
 def gettimetable():
     neis = neispy.Client(KEY=key)
-    sctimetable = None
     schoolinfo = neis.schoolInfo(SCHUL_NM=schoolname)
     AOSC = schoolinfo[0].ATPT_OFCDC_SC_CODE
     SSC = schoolinfo[0].SD_SCHUL_CODE
