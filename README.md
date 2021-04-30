@@ -11,6 +11,6 @@ NEIS Open API를 이용해 시간표(일반적으로 지원되지 않음)와 급
 # 실행 방법
 1. 파이썬으로 `main.py`를 실행합니다.
 # 이 봇을 사용해보기
-https://funami.tech/schoolBot/joinDiscord
+https://funami.tech/TrySchoolBot
 # 면책 조항
 이 소프트웨어는 Arch Linux하 Python 3.8.5에서 개발되고 태스트되었습니다. 이외 시스템에서의 작동을 보장하지 않습니다.
