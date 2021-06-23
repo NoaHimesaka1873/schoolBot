@@ -12,9 +12,8 @@ with open("settings.json", "r") as settings:
 @bot.event
 async def on_ready():
     with open("settings.json", "r") as pre:
-        await bot.change_presence(
-            activity=discord.Game(name=json.load(pre)["presence"])
-        )
+        await bot.change_presence(activity=discord.Game(
+            name=json.load(pre)["presence"]))
 
 
 @bot.command(name="봇")
