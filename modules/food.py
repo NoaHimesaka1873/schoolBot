@@ -16,7 +16,8 @@ with open("settings.json", "r") as settings:
 def getfood(schoolname: str, _date: str, foodtype: int):
     neis = neispy.Client(KEY=key)
     try:
-        schoolinfo = asyncio.new_event_loop().run_until_complete(neis.schoolInfo(SCHUL_NM=schoolname))
+        schoolinfo = asyncio.new_event_loop().run_until_complete(
+            neis.schoolInfo(SCHUL_NM=schoolname))
         AOSC = schoolinfo[0].ATPT_OFCDC_SC_CODE
         SSC = schoolinfo[0].SD_SCHUL_CODE
         schoolmeal = asyncio.new_event_loop().run_until_complete(
