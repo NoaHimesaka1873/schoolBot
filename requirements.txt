@@ -1,2 +1,3 @@
 neispy
 discord.py
+nest-asyncio

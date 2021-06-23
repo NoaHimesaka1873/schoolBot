@@ -1,0 +1,12 @@
+{
+  "도움말": {
+      "filename": "help",
+      "location": "modules",
+      "mainfunc": "main"
+    },
+  "급식": {
+      "filename": "food",
+      "location": "modules",
+      "mainfunc": "main"
+    }
+}
