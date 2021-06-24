@@ -83,6 +83,10 @@ async def main(ctx, args):
                              value=dinner)
             await ctx.send(embed=embed3)
 
+        if breakfast is None and lunch is None and dinner is None:
+            await ctx.send("ERROR! 데이터가 없습니다.")
+
+
     else:
         foodie = getfood(school, _date, foodtype)
         if foodie is not None:
@@ -95,3 +99,5 @@ async def main(ctx, args):
                 value=foodie)
             print("everything is done! ready to send")
             await ctx.send(embed=embed)
+        else:
+            await ctx.send("ERROR! 데이터가 없습니다.")

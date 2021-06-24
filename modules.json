@@ -1,12 +1,18 @@
-{
-  "도움말": {
-      "filename": "help",
-      "location": "modules",
-      "mainfunc": "main"
-    },
-  "급식": {
-      "filename": "food",
-      "location": "modules",
-      "mainfunc": "main"
-    }
-}
+[
+  {
+    "command": "도움말",
+    "filename": "help",
+    "location": "modules",
+    "mainfunc": "main",
+    "enabled": 1,
+    "help": "help/help.json"
+  },
+  {
+    "command": "급식",
+    "filename": "food",
+    "location": "modules",
+    "mainfunc": "main",
+    "enabled": 1,
+    "help": "help/food.json"
+  }
+]

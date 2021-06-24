@@ -18,13 +18,25 @@ async def on_ready():
 async def decodeCommand(ctx, *args):
     with open("modules.json") as _modules:
         modules = json.load(_modules)
-    try:
-        sys.path.insert(1, modules[args[0]]['location'])
-        loadmd = __import__(modules[args[0]]['filename'])
-        func = getattr(loadmd, modules[args[0]]['mainfunc'])
-        await func(ctx, args)
-    except Exception as e:
-        await ctx.send("ERROR! 명령어가 없습니다.")
-        print(e)
+
+    curmodule = None
+    print(modules)
+    for mo in modules:
+        if args[0] == mo['command'] and mo['enabled']:
+            curmodule = mo['filename']
+            curlocation = mo['location']
+            curmainfunc = mo['mainfunc']
+            break
+
+    if curmodule is not None:
+        try:
+            sys.path.insert(1, curlocation)
+            loadmd = __import__(curmodule)
+            func = getattr(loadmd, curmainfunc)
+            await func(ctx, args)
+        except Exception as e:
+            await ctx.send("ERROR! 모듈 실행중 오류가 발생했습니다")
+    else:
+        ctx.send('ERROR! 명령어가 없습니다!')
 
 bot.run(token)
