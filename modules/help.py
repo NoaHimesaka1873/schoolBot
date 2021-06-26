@@ -24,5 +24,5 @@ async def main(ctx, args):
                 embed.add_field(name=i['command'], value=i['description'], inline=False)
             await dm_user_embed(ctx, embed)
 
-    await ctx.send(f"{ctx.author.mention}님, 메시지를 확인해주세요!")
+    await ctx.send(f"{ctx.author.mention}님, 도움말을 보시려면 메시지를 확인해주세요!")
 
