@@ -12,8 +12,9 @@ with open("settings.json", "r") as settings:
 @bot.event
 async def on_ready():
     with open("settings.json", "r") as pre:
-        await bot.change_presence(activity=discord.Game(
-            name=json.load(pre)["presence"]))
+        await bot.change_presence(
+            activity=discord.Game(name=json.load(pre)["presence"])
+        )
 
 
 @bot.command(name="봇")
@@ -22,7 +23,6 @@ async def decodeCommand(ctx, *args):
         modules = json.load(_modules)
 
     curmodule = None
-    print(modules)
     for mo in modules:
         if args[0] == mo["command"] and mo["enabled"]:
             curmodule = mo["filename"]
