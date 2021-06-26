@@ -1,4 +1,5 @@
 import json
+
 import discord
 
 
@@ -11,18 +12,17 @@ async def main(ctx, args):
         modules = json.load(mo)
 
     for mo in modules:
-        if mo['enabled']:
-            with open(mo['help'], "r") as _help:
+        if mo["enabled"]:
+            with open(mo["help"], "r") as _help:
                 help1 = json.load(_help)
 
-            embed = discord.Embed(
-                title=f"학교봇 도움말: {mo['command']}",
-                color=discord.Color.blue()
-            )
+            embed = discord.Embed(title=f"학교봇 도움말: {mo['command']}",
+                                  color=discord.Color.blue())
 
             for i in help1:
-                embed.add_field(name=i['command'], value=i['description'], inline=False)
+                embed.add_field(name=i["command"],
+                                value=i["description"],
+                                inline=False)
             await dm_user_embed(ctx, embed)
 
-    await ctx.send(f"{ctx.author.mention}님, 메시지를 확인해주세요!")
-
+    await ctx.send(f"{ctx.author.mention}님, 도움말을 보시려면 메시지를 확인해주세요!")
