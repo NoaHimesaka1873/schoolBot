@@ -4,7 +4,7 @@
     "filename": "help",
     "location": "modules",
     "mainfunc": "main",
-    "enabled": 1,
+    "enabled": true,
     "help": "help/help.json"
   },
   {
@@ -12,7 +12,7 @@
     "filename": "food",
     "location": "modules",
     "mainfunc": "main",
-    "enabled": 1,
+    "enabled": true,
     "help": "help/food.json"
   }
 ]
