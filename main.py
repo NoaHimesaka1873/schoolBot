@@ -35,8 +35,8 @@ async def decodeCommand(ctx, *args):
             func = getattr(loadmd, curmainfunc)
             await func(ctx, args)
         except Exception as e:
-            await ctx.send("ERROR! 모듈 실행중 오류가 발생했습니다")
+            await ctx.send("에러! 모듈 실행중 오류가 발생했습니다")
     else:
-        ctx.send('ERROR! 명령어가 없습니다!')
+        ctx.send('에러! 명령어가 없습니다!')
 
 bot.run(token)
