@@ -1,7 +1,8 @@
-import discord
 import json
-from discord.ext import commands
 import sys
+
+import discord
+from discord.ext import commands
 
 bot = commands.Bot("학교")
 with open("settings.json", "r") as settings:
