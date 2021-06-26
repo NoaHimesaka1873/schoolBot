@@ -84,7 +84,7 @@ async def main(ctx, args):
             await ctx.send(embed=embed3)
 
         if breakfast is None and lunch is None and dinner is None:
-            await ctx.send("ERROR! 데이터가 없습니다.")
+            await ctx.send("에러! 데이터가 없습니다.")
 
 
     else:
@@ -97,7 +97,6 @@ async def main(ctx, args):
             embed.add_field(
                 name=f"{datetime.strptime(_date, '%Y%m%d').strftime('%Y년 %m월 %d일')} ({ftreference[foodtype]})",
                 value=foodie)
-            print("everything is done! ready to send")
             await ctx.send(embed=embed)
         else:
-            await ctx.send("ERROR! 데이터가 없습니다.")
+            await ctx.send("에러! 데이터가 없습니다.")
