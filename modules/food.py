@@ -20,15 +20,14 @@ def getfood(schoolname: str, _date: str, foodtype: int):
     neis = neispy.Client(KEY=key)
     try:
         schoolinfo = asyncio.new_event_loop().run_until_complete(
-            neis.schoolInfo(SCHUL_NM=schoolname)
-        )
+            neis.schoolInfo(SCHUL_NM=schoolname))
         AOSC = schoolinfo[0].ATPT_OFCDC_SC_CODE
         SSC = schoolinfo[0].SD_SCHUL_CODE
         schoolmeal = asyncio.new_event_loop().run_until_complete(
-            neis.mealServiceDietInfo(
-                AOSC, SSC, MLSV_YMD=int(_date), MMEAL_SC_CODE=foodtype
-            )
-        )
+            neis.mealServiceDietInfo(AOSC,
+                                     SSC,
+                                     MLSV_YMD=int(_date),
+                                     MMEAL_SC_CODE=foodtype))
         meal = "\n".join(schoolmeal[0].DDISH_NM.split("<br/>"))
         return meal
     except Exception as e:
@@ -65,25 +64,31 @@ async def main(ctx, args):
         lunch = getfood(school, _date, 2)
         dinner = getfood(school, _date, 3)
         if breakfast is not None:
-            embed1 = discord.Embed(title=f"{school}의 급식", color=discord.Color.blue())
+            embed1 = discord.Embed(title=f"{school}의 급식",
+                                   color=discord.Color.blue())
             embed1.add_field(
-                name=f"{datetime.strptime(_date, '%Y%m%d').strftime('%Y년 %m월 %d일')} ({ftreference[1]})",
+                name=
+                f"{datetime.strptime(_date, '%Y%m%d').strftime('%Y년 %m월 %d일')} ({ftreference[1]})",
                 value=breakfast,
             )
             await ctx.send(embed=embed1)
 
         if lunch is not None:
-            embed2 = discord.Embed(title=f"{school}의 급식", color=discord.Color.blue())
+            embed2 = discord.Embed(title=f"{school}의 급식",
+                                   color=discord.Color.blue())
             embed2.add_field(
-                name=f"{datetime.strptime(_date, '%Y%m%d').strftime('%Y년 %m월 %d일')} ({ftreference[2]})",
+                name=
+                f"{datetime.strptime(_date, '%Y%m%d').strftime('%Y년 %m월 %d일')} ({ftreference[2]})",
                 value=lunch,
             )
             await ctx.send(embed=embed2)
 
         if dinner is not None:
-            embed3 = discord.Embed(title=f"{school}의 급식", color=discord.Color.blue())
+            embed3 = discord.Embed(title=f"{school}의 급식",
+                                   color=discord.Color.blue())
             embed3.add_field(
-                name=f"{datetime.strptime(_date, '%Y%m%d').strftime('%Y년 %m월 %d일')} ({ftreference[3]})",
+                name=
+                f"{datetime.strptime(_date, '%Y%m%d').strftime('%Y년 %m월 %d일')} ({ftreference[3]})",
                 value=dinner,
             )
             await ctx.send(embed=embed3)
@@ -94,9 +99,11 @@ async def main(ctx, args):
     else:
         foodie = getfood(school, _date, foodtype)
         if foodie is not None:
-            embed = discord.Embed(title=f"{school}의 급식", color=discord.Color.blue())
+            embed = discord.Embed(title=f"{school}의 급식",
+                                  color=discord.Color.blue())
             embed.add_field(
-                name=f"{datetime.strptime(_date, '%Y%m%d').strftime('%Y년 %m월 %d일')} ({ftreference[foodtype]})",
+                name=
+                f"{datetime.strptime(_date, '%Y%m%d').strftime('%Y년 %m월 %d일')} ({ftreference[foodtype]})",
                 value=foodie,
             )
             await ctx.send(embed=embed)
