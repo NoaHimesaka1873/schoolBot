@@ -1,17 +1,19 @@
-import discord
 import json
-from discord.ext import commands
 import sys
+
+import discord
+from discord.ext import commands
 
 bot = commands.Bot("학교")
 with open("settings.json", "r") as settings:
-    token = json.load(settings)['discord_token']
+    token = json.load(settings)["discord_token"]
 
 
 @bot.event
 async def on_ready():
     with open("settings.json", "r") as pre:
-        await bot.change_presence(activity=discord.Game(name=json.load(pre)['presence']))
+        await bot.change_presence(activity=discord.Game(
+            name=json.load(pre)["presence"]))
 
 
 @bot.command(name="봇")
@@ -22,10 +24,10 @@ async def decodeCommand(ctx, *args):
     curmodule = None
     print(modules)
     for mo in modules:
-        if args[0] == mo['command'] and mo['enabled']:
-            curmodule = mo['filename']
-            curlocation = mo['location']
-            curmainfunc = mo['mainfunc']
+        if args[0] == mo["command"] and mo["enabled"]:
+            curmodule = mo["filename"]
+            curlocation = mo["location"]
+            curmainfunc = mo["mainfunc"]
             break
 
     if curmodule is not None:
@@ -37,6 +39,7 @@ async def decodeCommand(ctx, *args):
         except Exception as e:
             await ctx.send("에러! 모듈 실행중 오류가 발생했습니다")
     else:
-        ctx.send('에러! 명령어가 없습니다!')
+        ctx.send("에러! 명령어가 없습니다!")
+
 
 bot.run(token)
