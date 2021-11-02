@@ -6,14 +6,14 @@ from datetime import datetime
 from datetime import timedelta
 
 import discord
-import neispy
+from neispy import Neispy
 
 ftr1 = ["", "조식", "중식", "석식"]
 ftr2 = {"조식": 1, "중식": 2, "석식": 3, "all": 4}
 
 with open("settings.json", "r") as settings:
     key = json.load(settings)["neis_token"]
-neis = neispy.Client(KEY=key)
+neis = Neispy.sync(KEY=key)
 nest_asyncio.apply()
 
 
