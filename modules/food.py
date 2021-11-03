@@ -32,6 +32,8 @@ def getfood(schoolname: str, _date: str, foodtype: int):
         )
         return "\n".join(schoolmeal[0].DDISH_NM.split("<br/>"))
     except Exception as e:
+        with open(f"{datetime.today().strftime('%c')} error.log", "a") as f:
+            f.write(str(e))
         return None
 
 

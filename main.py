@@ -2,6 +2,7 @@ import json
 import sys
 
 import discord
+from datetime import datetime
 from discord.ext import commands
 
 bot = commands.Bot("학교")
@@ -37,6 +38,8 @@ async def decodeCommand(ctx, *args):
             func = getattr(loadmd, curmainfunc)
             await func(ctx, args)
         except Exception as e:
+            with open(f"{datetime.today().strftime('%c')} error.log", "a") as f:
+                f.write(str(e))
             await ctx.send("에러! 모듈 실행중 오류가 발생했습니다")
     else:
         ctx.send("에러! 명령어가 없습니다!")
