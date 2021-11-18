@@ -9,4 +9,4 @@ NEIS Open API를 이용해 급식을 볼 수 있는 봇 (OldGen에서 지원되�
 # 이 봇을 사용해보기
 https://funami.tech/TrySchoolBot
 # 면책 조항
-이 소프트웨어는 Python 3.9 이상에서만 작동을 보증합니다. 그 미만 버전에서는 작동하지 않을 수 있습니다.
+이 소프트웨어는 Python 3.9 이상에서만 작동을 보증합니다. (Oracle Linux 8.4/8.5 Python 3.9에서 테스트됨.) 그 미만 버전에서는 작동하지 않습니다.
