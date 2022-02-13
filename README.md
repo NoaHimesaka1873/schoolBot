@@ -1,3 +1,6 @@
+# EOL NOTICE
+Discord의 API 변경으로 인해 EOL되었습니다. Fuck you Discord.
+
 # 학교봇 NextGen
 NEIS Open API를 이용해 급식을 볼 수 있는 봇 (OldGen에서 지원되던 기능 일부는 현재 동작하지 않음. 개발중)
 # 설치 방법
